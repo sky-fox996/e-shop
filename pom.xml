@@ -20,6 +20,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <!-- 指定编译器版本为1.8-->
         <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+        <kotlin.version>1.4.20</kotlin.version>
     </properties>
 
     <!--依赖jar包-->
@@ -48,6 +49,17 @@
             <version>4.13</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib-jdk8</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-test</artifactId>
+            <version>${kotlin.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -64,6 +76,30 @@
                     <webXml>web\WEB-INF\web.xml</webXml>
                     <!-- 忽略web.xml文件-->
                     <!--<failOnMissingWebXml>false</failOnMissingWebXml>-->
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>test-compile</id>
+                        <phase>test-compile</phase>
+                        <goals>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <jvmTarget>1.8</jvmTarget>
                 </configuration>
             </plugin>
         </plugins>
